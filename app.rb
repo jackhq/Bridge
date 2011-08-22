@@ -23,3 +23,28 @@ get '/txfailure/:id' do |id|
   { :errors => "server error" }.to_json
 end
 
+post '/foo' do
+  { :hello => "world" }.to_json
+end
+
+post '/txfailure' do 
+  { :errors => "server error" }.to_json
+end
+
+put '/foo/:id' do |id|
+  { :hello => "world" }.to_json
+end
+
+put '/txfailure/:id' do |id|
+  { :errors => "server error" }.to_json
+end
+
+delete '/foo/:id' do |id|
+  { :hello => "world" }.to_json
+end
+
+delete '/txfailure/:id' do |id|
+  { :errors => "server error" }.to_json
+end
+
+

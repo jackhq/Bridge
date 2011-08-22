@@ -25,12 +25,38 @@ class Bridge
       )
     true
     
-  create: (data) ->
-    console.log 'Create one resource'
-  update: (data) ->
-    console.log 'Update one resource'
-  delete: (id) -> 
-    console.log 'Delete one resource'
+  create: (data, cb) ->
+    $.post("/#{@resource}", data, null, "json")
+      .success( (data, txtStatus) -> 
+        if data["errors"] then cb(data["errors"], data) else cb(null, data)
+      )
+      .error( (data, txtStatus) -> 
+        cb({ message: "Server returned and error status #{txtStatus}"}, data)
+      )
+    true
+  
+  update: (id, data, cb) ->
+    data['_method'] = 'put'
+    $.post("/#{@resource}/#{id}", data, null, "json")
+      .success( (data, txtStatus) -> 
+        if data["errors"] then cb(data["errors"], data) else cb(null, data)
+      )
+      .error( (data, txtStatus) -> 
+        cb({ message: "Server returned and error status #{txtStatus}"}, data)
+      )
+    true
+
+  delete: (id, cb) -> 
+    data = { '_method': 'delete' }
+    $.post("/#{@resource}/#{id}", data, null, "json")
+      .success( (data, txtStatus) -> 
+        if data["errors"] then cb(data["errors"], data) else cb(null, data)
+      )
+      .error( (data, txtStatus) -> 
+        cb({ message: "Server returned and error status #{txtStatus}"}, data)
+      )
+    true
+    
   search: (criteria) ->
     console.log 'Criteria'
     

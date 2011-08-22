@@ -66,10 +66,103 @@
       });
       return waits(100);
     });
-    return it('get method should return an errors object if error occured on server', function() {
+    it('get method should return an errors object if error occured on server', function() {
       bridge.resource = 'txfailure';
       runs(function() {
         return bridge.get(1, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    it('create method should successfully return an array of json via callback', function() {
+      bridge.resource = 'foo';
+      runs(function() {
+        return bridge.create({
+          data: 'foo'
+        }, function(err, data) {
+          return expect(data.hello).toEqual('world');
+        });
+      });
+      return waits(100);
+    });
+    it('create method should return an error if no one home', function() {
+      bridge.resource = 'error';
+      runs(function() {
+        return bridge.create({
+          data: 'foo'
+        }, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    it('create method should return an errors object if error occured on server', function() {
+      bridge.resource = 'txfailure';
+      runs(function() {
+        return bridge.create({
+          data: 'foo'
+        }, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    it('update method should successfully return an array of json via callback', function() {
+      bridge.resource = 'foo';
+      runs(function() {
+        return bridge.update(1, {
+          data: 'foo'
+        }, function(err, data) {
+          return expect(data.hello).toEqual('world');
+        });
+      });
+      return waits(100);
+    });
+    it('update method should return an error if no one home', function() {
+      bridge.resource = 'error';
+      runs(function() {
+        return bridge.update(1, {
+          data: 'foo'
+        }, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    it('update method should return an errors object if error occured on server', function() {
+      bridge.resource = 'txfailure';
+      runs(function() {
+        return bridge.update(1, {
+          data: 'foo'
+        }, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    it('delete method should successfully return an array of json via callback', function() {
+      bridge.resource = 'foo';
+      runs(function() {
+        return bridge["delete"](1, function(err, data) {
+          return expect(data.hello).toEqual('world');
+        });
+      });
+      return waits(100);
+    });
+    it('delete method should return an error if no one home', function() {
+      bridge.resource = 'error';
+      runs(function() {
+        return bridge["delete"](1, function(err, data) {
+          return expect(err).toNotEqual(null);
+        });
+      });
+      return waits(100);
+    });
+    return it('delete method should return an errors object if error occured on server', function() {
+      bridge.resource = 'txfailure';
+      runs(function() {
+        return bridge["delete"](1, function(err, data) {
           return expect(err).toNotEqual(null);
         });
       });
