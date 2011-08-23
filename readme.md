@@ -25,6 +25,33 @@ Include in your web application after jquery.
     
 See the docs/index.html for annotated source
 
+## Testing
+
+1. Ruby must be installed
+2. Install bundler
+
+    gem install bundler
+
+3. Use Bundler to install Sinatra test web server
+
+    bundle install
+
+4. Install nodejs and npm
+
+    see nodejs.org and npmjs.org
+
+5. Install node dependencies
+
+    npm install
+    
+6. Run Test Server (in one console)
+
+    ruby app.rb
+
+7. Run Test Browser
+
+    open SpecRunner.html
+
 ## Support
 
 Please create an issue or hit us up on twitter @jackhq
