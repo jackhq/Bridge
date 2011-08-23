@@ -8,20 +8,24 @@ jsonp or any complex commands, it simply acts as a nice wrapper around the jquer
 
 You can download bridge-0.1.0.js from the dist directory, it is not minified or compressed.
 
+[bridge-0.1.0.js](https://raw.github.com/jackhq/Bridge/master/dist/bridge-0.1.0.js)
+
 ## Usage
 
 Include in your web application after jquery.
-
-    posts = new Bridge('posts');
     
-    posts.all(function(err, data) {
-      // Get All Posts
-    });
+``` ruby
+posts = new Bridge('posts');
 
-    posts.create(data, function(err, data) {
-      // Create Post
-    });
-    
+posts.all(function(err, data) {
+  // Get All Posts
+});
+
+posts.create(data, function(err, data) {
+  // Create Post
+});
+
+```
     
 See the docs/index.html for annotated source
 
@@ -30,27 +34,38 @@ See the docs/index.html for annotated source
 1. Ruby must be installed
 2. Install bundler
 
-    gem install bundler
+``` ruby
+gem install bundler
+```
 
 3. Use Bundler to install Sinatra test web server
 
-    bundle install
+``` ruby
+bundle install
+``` 
 
 4. Install nodejs and npm
 
-    see nodejs.org and npmjs.org
+``` ruby
+see nodejs.org and npmjs.org
+``` 
 
 5. Install node dependencies
 
-    npm install
-    
+``` ruby
+npm install
+```
 6. Run Test Server (in one console)
 
-    ruby app.rb
+``` ruby
+ruby app.rb
+```
 
 7. Run Test Browser
 
-    open SpecRunner.html
+``` ruby
+open SpecRunner.html
+``` 
 
 * Successfully tested with jQuery 1.6.1
 
