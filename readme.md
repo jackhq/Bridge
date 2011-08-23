@@ -64,7 +64,7 @@ ruby app.rb
 7. Run Test Browser
 
 ``` ruby
-open SpecRunner.html
+open http://localhost:4567/SpecRunner.html
 ``` 
 
 * Successfully tested with jQuery 1.6.1
