@@ -1,7 +1,7 @@
 {
   "name": "SCData",
   "description": "A lightweight Restful databridge between SproutCore2 and Rails",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "http://#",
   "author": "Jack Russell Software",
   "private": true,

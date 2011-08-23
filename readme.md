@@ -52,6 +52,8 @@ See the docs/index.html for annotated source
 
     open SpecRunner.html
 
+* Successfully tested with jQuery 1.6.1
+
 ## Support
 
 Please create an issue or hit us up on twitter @jackhq
@@ -68,3 +70,4 @@ lean and mean, not full of features there are a lot of great libs for all of tha
 * jQuery
 * Rails
 * Jasmine
+* Docco
