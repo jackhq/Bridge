@@ -42,3 +42,8 @@ task 'spec', 'Run the test suite', ->
     # jasmine.stdout.on 'data', (data) -> print data.toString()
     # jasmine.stderr.on 'data', (data) -> print data.toString()
     # jasmine.on 'exit', (status) -> callback?() if status is 0
+task 'dist', 'Build the distribution file', ->
+  build ->
+    exec 'mkdir dist'
+    exec 'cp lib/index.js dist/bridge-0.1.0.js'
+

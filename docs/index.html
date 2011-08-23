@@ -1,0 +1,94 @@
+<!DOCTYPE html>  <html> <head>   <title>index.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               index.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <h1>The Bridge</h1>
+
+<p>Bridge a connection from SproutCore to Rails
+$ = require 'jquery'</p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h2>Usage example:</h2>
+
+<p>posts = new Bridge('posts')
+Now you have a resourceful adapter to your server.</p>             </td>             <td class="code">               <div class="highlight"><pre><span class="k">class</span> <span class="nx">Bridge</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>constructor automatically set the resource attribute</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">constructor: </span><span class="nf">(@resource)-&gt;</span></pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <p>All executes GET /[your resource] <br />
+Usage ex: <br />
+    bridge.all(function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });    </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">all: </span><span class="nf">(cb) -&gt;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/#{@resource}&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="k">if</span> <span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span> <span class="k">then</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span> <span class="nx">data</span><span class="p">)</span> <span class="k">else</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="nx">cb</span><span class="p">({</span> <span class="nv">message: </span><span class="s2">&quot;Server returned and error status #{txtStatus}&quot;</span><span class="p">},</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="kc">true</span></pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Get executes GET /[your resource]/[id] <br />
+Usage ex: <br />
+    bridge.get([id], function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });     </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">get: </span><span class="nf">(id, cb) -&gt;</span> 
+    <span class="nx">$</span><span class="p">.</span><span class="nx">getJSON</span><span class="p">(</span><span class="s2">&quot;/#{@resource}/#{id}&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="k">if</span> <span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span> <span class="k">then</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span> <span class="nx">data</span><span class="p">)</span> <span class="k">else</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="nx">cb</span><span class="p">({</span> <span class="nv">message: </span><span class="s2">&quot;Server returned and error status #{txtStatus}&quot;</span><span class="p">},</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="kc">true</span></pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <p>create executes POST /[your resource] <br />
+Usage ex: <br />
+    bridge.create([data], function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });      </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">create: </span><span class="nf">(data, cb) -&gt;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/#{@resource}&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="k">if</span> <span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span> <span class="k">then</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span> <span class="nx">data</span><span class="p">)</span> <span class="k">else</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="nx">cb</span><span class="p">({</span> <span class="nv">message: </span><span class="s2">&quot;Server returned and error status #{txtStatus}&quot;</span><span class="p">},</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="kc">true</span></pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>update executes PUT /[your resource]/[id] <br />
+Usage ex: <br />
+    bridge.update([id], [data], function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });     </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">update: </span><span class="nf">(id, data, cb) -&gt;</span>
+    <span class="nx">data</span><span class="p">[</span><span class="s1">&#39;_method&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;put&#39;</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/#{@resource}/#{id}&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="k">if</span> <span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span> <span class="k">then</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span> <span class="nx">data</span><span class="p">)</span> <span class="k">else</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="nx">cb</span><span class="p">({</span> <span class="nv">message: </span><span class="s2">&quot;Server returned and error status #{txtStatus}&quot;</span><span class="p">},</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="kc">true</span></pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>delete executes DELETE /[your resource]/[id] <br />
+Usage ex: <br />
+    bridge.update([id], function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });     </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">delete</span><span class="o">:</span> <span class="nf">(id, cb) -&gt;</span> 
+    <span class="nv">data = </span><span class="p">{</span> <span class="s1">&#39;_method&#39;</span><span class="o">:</span> <span class="s1">&#39;delete&#39;</span> <span class="p">}</span>
+    <span class="nx">$</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s2">&quot;/#{@resource}/#{id}&quot;</span><span class="p">,</span> <span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="s2">&quot;json&quot;</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">success</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="k">if</span> <span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">]</span> <span class="k">then</span> <span class="nx">cb</span><span class="p">(</span><span class="nx">data</span><span class="p">[</span><span class="s2">&quot;errors&quot;</span><span class="p">],</span> <span class="nx">data</span><span class="p">)</span> <span class="k">else</span> <span class="nx">cb</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+      <span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nf">(data, txtStatus) -&gt;</span> 
+        <span class="nx">cb</span><span class="p">({</span> <span class="nv">message: </span><span class="s2">&quot;Server returned and error status #{txtStatus}&quot;</span><span class="p">},</span> <span class="nx">data</span><span class="p">)</span>
+      <span class="p">)</span>
+    <span class="kc">true</span></pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>find executes GET /[your resource]?[params] <br />
+    bridge.update([params], function(err, data) { <br />
+      // Respond to the results here <br />
+      // if err is not null - then the server <br />
+      // return an error or errors object <br />
+    });                                             </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">find: </span><span class="nf">(criteria) -&gt;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="s1">&#39;Comming Soon&#39;</span>
+    </pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>valid executes checks if the resource is set. <br />
+Usage ex: <br />
+    bridge.valid() == true or false;                </p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="nv">valid: </span><span class="o">-&gt;</span>
+    <span class="k">if</span> <span class="nx">@resource</span> <span class="k">then</span> <span class="kc">true</span> <span class="k">else</span> <span class="kc">false</span>
+
+<span class="k">if</span> <span class="nb">window</span> <span class="k">then</span> <span class="nv">exports = </span><span class="nb">window</span>
+<span class="nv">exports.Bridge = </span><span class="nx">Bridge</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
